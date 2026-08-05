@@ -9,7 +9,7 @@ Welcome to my football analysis portfolio! I turn match performance data and tac
 ### 1. Tottenham Hotspur — 10-Man Low Block vs Chelsea
 > Compact defensive structure and quick transition paths.
 
-![Spurs Tactics](outputs/download(1).png)
+![Spurs Tactics](outputs/download (1).png)
 
 ---
 
