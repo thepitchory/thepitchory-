@@ -9,14 +9,14 @@ Welcome to my football analysis portfolio! I turn match performance data and tac
 ### 1. Tottenham Hotspur — 10-Man Low Block vs Chelsea
 > Compact defensive structure and quick transition paths.
 
-![Spurs Tactics](outputs/spurs_vs_chelsea.png)
+![Spurs Tactics](outputs/download.png)
 
 ---
 
 ### 2. Mason Mount — Pass Network & Touch Density
 > Dual-pitch dashboard highlighting half-space chance creation and occupancy.
 
-![Mason Mount Analysis](outputs/mount_pass_network.png)
+![Mason Mount Analysis](outputs/download.png)
 
 ---
 
