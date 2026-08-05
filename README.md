@@ -16,7 +16,7 @@ Welcome to my football analysis portfolio! I turn match performance data and tac
 ### 2. Mason Mount — Pass Network & Touch Density
 > Dual-pitch dashboard highlighting half-space chance creation and occupancy.
 
-![Mason Mount Analysis](outputs/download.png)
+![Mason Mount Analysis](outputs/mount.png)
 
 ---
 
