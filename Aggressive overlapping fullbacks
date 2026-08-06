@@ -1,0 +1,266 @@
+# ⚽ @PITCHORY | Tactical Visualization Collection
+
+A collection of data-driven, publication-ready tactical mechanics rendered using Python, Matplotlib, and mplsoccer.
+
+---
+
+## 📌 Mechanism 01: Aggressive Overlapping Fullbacks (2v1 Overload)
+
+![Aggressive Overlapping Fullbacks](outputs/overlapping_fullbacks.png)
+
+### 📊 Tactical Breakdown
+* **Core Concept:** The Right Fullback (RB) makes an aggressive high-speed run down the touchline while the Right Winger (RW) tucks inside into the half-space.
+* **The Dilemma:** Forces the opponent's Left Fullback (LB) into a severe 2v1 decision: step inside to track the winger's inverted run, or stay wide to cover the overlapping fullback.
+* **Risk Factor:** Leaves large vacated space in behind on transition if possession is lost high up the pitch.
+
+---
+
+### 🐍 Python Source Code
+
+```python
+import matplotlib.pyplot as plt
+from mplsoccer import Pitch
+
+# Initialize Pitch (Dark Cyan Theme)
+pitch = Pitch(
+    pitch_type='statsbomb',
+    pitch_color='#001F2D',
+    line_color='#0088AA',
+    linewidth=2,
+)
+fig, ax = plt.subplots(figsize=(10, 7))
+fig.patch.set_facecolor('#001F2D')
+pitch.draw(ax=ax)
+
+# Color Palette
+TEAM_COLOR = '#0066FF'  # Attacking team
+MOVEMENT_CYAN = '#00FFFF'  # Overlap movement line
+PASS_GOLD = '#FFD700'  # Pass vector
+DEFENDER_GRAY = '#666666'  # Isolated defender
+
+# --- PLAYERS ---
+players = {
+    'CM': (65, 45),
+    'RW': (80, 20),
+    'RB': (62, 10),
+}
+
+opponents = {
+    'LB': (82, 18),
+    'CB': (88, 38),
+}
+
+# Draw Attacking Players
+for pos, (x, y) in players.items():
+  pitch.scatter(
+      x,
+      y,
+      s=450,
+      color=TEAM_COLOR,
+      edgecolors='#FFFFFF',
+      linewidth=2.5,
+      ax=ax,
+      zorder=4,
+  )
+  ax.text(
+      x,
+      y - 4.2,
+      pos,
+      color='#FFFFFF',
+      fontsize=9,
+      ha='center',
+      fontweight='bold',
+      zorder=5,
+  )
+
+# Draw Defenders
+for pos, (x, y) in opponents.items():
+  pitch.scatter(
+      x,
+      y,
+      s=250,
+      color=DEFENDER_GRAY,
+      edgecolors='#FFFFFF',
+      linewidth=1.5,
+      ax=ax,
+      zorder=3,
+      alpha=0.7,
+  )
+  ax.text(
+      x,
+      y - 3.8,
+      pos,
+      color='#CCCCCC',
+      fontsize=8,
+      ha='center',
+      fontweight='bold',
+      zorder=5,
+  )
+
+# --- VECTORS & ACTIONS ---
+pitch.arrows(
+    65,
+    45,
+    78,
+    23,
+    color=PASS_GOLD,
+    ax=ax,
+    width=2,
+    headwidth=4,
+    headlength=4,
+    zorder=3,
+)
+pitch.arrows(
+    80,
+    20,
+    84,
+    28,
+    color=PASS_GOLD,
+    ax=ax,
+    width=1.5,
+    headwidth=3.5,
+    headlength=3.5,
+    linestyle='dotted',
+    zorder=3,
+)
+pitch.arrows(
+    62,
+    10,
+    95,
+    8,
+    color=MOVEMENT_CYAN,
+    ax=ax,
+    width=2.5,
+    headwidth=4.5,
+    headlength=4.5,
+    linestyle='dashed',
+    zorder=3,
+)
+
+# --- DYNAMIC LEGEND ---
+ax.text(
+    5, 75, 'LEGEND', color='#FFFFFF', fontsize=9, fontweight='bold', ha='left'
+)
+pitch.scatter(
+    6,
+    70,
+    s=120,
+    color=TEAM_COLOR,
+    edgecolors='#FFFFFF',
+    linewidth=1,
+    ax=ax,
+    zorder=4,
+)
+ax.text(
+    10,
+    70,
+    'Attacking Team',
+    color='#FFFFFF',
+    fontsize=8,
+    va='center',
+    ha='left',
+)
+pitch.scatter(
+    6,
+    65,
+    s=80,
+    color=DEFENDER_GRAY,
+    edgecolors='#FFFFFF',
+    linewidth=1,
+    ax=ax,
+    zorder=4,
+)
+ax.text(
+    10, 65, 'Defenders', color='#FFFFFF', fontsize=8, va='center', ha='left'
+)
+pitch.arrows(
+    5,
+    60,
+    12,
+    60,
+    color=MOVEMENT_CYAN,
+    ax=ax,
+    width=1.5,
+    headwidth=3,
+    headlength=3,
+    linestyle='dashed',
+)
+ax.text(
+    15, 60, 'Overlap Run', color='#FFFFFF', fontsize=8, va='center', ha='left'
+)
+pitch.arrows(
+    5, 55, 12, 55, color=PASS_GOLD, ax=ax, width=1.5, headwidth=3, headlength=3
+)
+ax.text(
+    15, 55, 'Pass / Dribble', color='#FFFFFF', fontsize=8, va='center', ha='left'
+)
+
+# --- CALLOUTS ---
+ax.text(
+    88,
+    48,
+    '2v1 WIDE OVERLOAD\nRW draws opposition LB inside,\nleaving RB free on the touchline',
+    color='#FFD700',
+    fontsize=8.5,
+    ha='center',
+    va='center',
+    fontweight='bold',
+    bbox=dict(
+        boxstyle='round,pad=0.4',
+        facecolor='#001F2D',
+        edgecolor='#0088AA',
+        alpha=0.9,
+    ),
+)
+
+ax.text(
+    52,
+    15,
+    'Aggressive high-speed overlap\nexploits space behind defender',
+    color=MOVEMENT_CYAN,
+    fontsize=8.5,
+    ha='center',
+    va='center',
+    fontweight='bold',
+    bbox=dict(
+        boxstyle='round,pad=0.4',
+        facecolor='#001F2D',
+        edgecolor='#0088AA',
+        alpha=0.9,
+    ),
+)
+
+# --- BRANDING & HEADER LAYOUT ---
+fig.text(
+    0.05,
+    0.94,
+    '@PITCHORY',
+    color='#FFFFFF',
+    fontsize=16,
+    fontweight='bold',
+    ha='left',
+)
+fig.text(
+    0.05,
+    0.89,
+    'TACTICAL MECHANISM: AGGRESSIVE OVERLAPPING FULLBACK (2v1 OVERLOAD)',
+    color='#FFFFFF',
+    fontsize=11,
+    fontweight='bold',
+    ha='left',
+)
+fig.text(
+    0.95,
+    0.03,
+    '© Pitchory',
+    color='#FFFFFF',
+    fontsize=9,
+    alpha=0.6,
+    ha='right',
+    style='italic',
+)
+
+# Save to your outputs folder
+plt.savefig('outputs/aggressive_fullbacks.png', dpi=300, bbox_inches='tight')
+plt.close()
+```
