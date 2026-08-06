@@ -261,6 +261,6 @@ fig.text(
 )
 
 # Save to your outputs folder
-plt.savefig('outputs/aggressive_fullbacks.png', dpi=300, bbox_inches='tight')
+plt.savefig('outputs/aggressive_overlapping.png', dpi=300, bbox_inches='tight')
 plt.close()
 ```
